@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { useState } from 'react';
 import CarCard from '@/components/CarCard';
 import { Button } from '@/components/ui/button';
@@ -126,23 +127,17 @@ const CarsList = () => {
 
           {/* Cars Grid */}
           {!isLoading && !isError && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredCars.map((car, index) => (
-                <motion.div
+                <ScrollReveal
                   key={car.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  delay={index * 0.05} // Faster stagger
+                  direction="up"
                 >
                   <CarCard {...car} />
-                </motion.div>
+                </ScrollReveal>
               ))}
-            </motion.div>
+            </div>
           )}
 
           {/* Empty State */}
